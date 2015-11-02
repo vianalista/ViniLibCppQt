@@ -17,6 +17,10 @@ public:
 
 private:
     Ui::MainWindow *ui;
+
+private slots:
+    void showMsg1(bool checked);
+    void showMsg2(bool checked);
 };
 
 #endif // MAINWINDOW_H
