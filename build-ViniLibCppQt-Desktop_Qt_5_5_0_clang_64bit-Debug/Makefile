@@ -50,13 +50,17 @@ OBJECTS_DIR   = ./
 
 SOURCES       = ../ViniLibCppQt/main.cpp \
 		../ViniLibCppQt/mainwindow.cpp \
-		../ViniLibCppQt/threadexample1.cpp moc_mainwindow.cpp \
-		moc_threadexample1.cpp
+		../ViniLibCppQt/threadexample1.cpp \
+		../ViniLibCppQt/threadexample2.cpp moc_mainwindow.cpp \
+		moc_threadexample1.cpp \
+		moc_threadexample2.cpp
 OBJECTS       = main.o \
 		mainwindow.o \
 		threadexample1.o \
+		threadexample2.o \
 		moc_mainwindow.o \
-		moc_threadexample1.o
+		moc_threadexample1.o \
+		moc_threadexample2.o
 DIST          = /Applications/qt/5.5/clang_64/mkspecs/features/spec_pre.prf \
 		/Applications/qt/5.5/clang_64/mkspecs/qdevice.pri \
 		/Applications/qt/5.5/clang_64/mkspecs/features/device_config.prf \
@@ -196,9 +200,11 @@ DIST          = /Applications/qt/5.5/clang_64/mkspecs/features/spec_pre.prf \
 		/Applications/qt/5.5/clang_64/mkspecs/features/yacc.prf \
 		/Applications/qt/5.5/clang_64/mkspecs/features/lex.prf \
 		../ViniLibCppQt/ViniLibCppQt.pro ../ViniLibCppQt/mainwindow.h \
-		../ViniLibCppQt/threadexample1.h ../ViniLibCppQt/main.cpp \
+		../ViniLibCppQt/threadexample1.h \
+		../ViniLibCppQt/threadexample2.h ../ViniLibCppQt/main.cpp \
 		../ViniLibCppQt/mainwindow.cpp \
-		../ViniLibCppQt/threadexample1.cpp
+		../ViniLibCppQt/threadexample1.cpp \
+		../ViniLibCppQt/threadexample2.cpp
 QMAKE_TARGET  = ViniLibCppQt
 DESTDIR       = #avoid trailing-slash linebreak
 TARGET        = ViniLibCppQt.app/Contents/MacOS/ViniLibCppQt
@@ -554,8 +560,8 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
-	$(COPY_FILE) --parents ../ViniLibCppQt/mainwindow.h ../ViniLibCppQt/threadexample1.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../ViniLibCppQt/main.cpp ../ViniLibCppQt/mainwindow.cpp ../ViniLibCppQt/threadexample1.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../ViniLibCppQt/mainwindow.h ../ViniLibCppQt/threadexample1.h ../ViniLibCppQt/threadexample2.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../ViniLibCppQt/main.cpp ../ViniLibCppQt/mainwindow.cpp ../ViniLibCppQt/threadexample1.cpp ../ViniLibCppQt/threadexample2.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../ViniLibCppQt/mainwindow.ui $(DISTDIR)/
 
 
@@ -582,9 +588,9 @@ compiler_objective_c_make_all:
 compiler_objective_c_clean:
 compiler_rcc_make_all:
 compiler_rcc_clean:
-compiler_moc_header_make_all: moc_mainwindow.cpp moc_threadexample1.cpp
+compiler_moc_header_make_all: moc_mainwindow.cpp moc_threadexample1.cpp moc_threadexample2.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_mainwindow.cpp moc_threadexample1.cpp
+	-$(DEL_FILE) moc_mainwindow.cpp moc_threadexample1.cpp moc_threadexample2.cpp
 moc_mainwindow.cpp: /Applications/qt/5.5/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
 		/Applications/qt/5.5/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
 		../ViniLibCppQt/mainwindow.h
@@ -594,6 +600,9 @@ moc_threadexample1.cpp: /Applications/qt/5.5/clang_64/lib/QtCore.framework/Heade
 		/Applications/qt/5.5/clang_64/lib/QtCore.framework/Headers/qthread.h \
 		../ViniLibCppQt/threadexample1.h
 	/Applications/qt/5.5/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -I/Applications/qt/5.5/clang_64/mkspecs/macx-clang -I/Users/vinicius/Documents/pessoal/desenv/ViniLibCppQt/ViniLibCppQt -I/Applications/qt/5.5/clang_64/lib/QtWidgets.framework/Headers -I/Applications/qt/5.5/clang_64/lib/QtGui.framework/Headers -I/Applications/qt/5.5/clang_64/lib/QtCore.framework/Headers -I. -F/Applications/qt/5.5/clang_64/lib ../ViniLibCppQt/threadexample1.h -o moc_threadexample1.cpp
+
+moc_threadexample2.cpp: ../ViniLibCppQt/threadexample2.h
+	/Applications/qt/5.5/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -I/Applications/qt/5.5/clang_64/mkspecs/macx-clang -I/Users/vinicius/Documents/pessoal/desenv/ViniLibCppQt/ViniLibCppQt -I/Applications/qt/5.5/clang_64/lib/QtWidgets.framework/Headers -I/Applications/qt/5.5/clang_64/lib/QtGui.framework/Headers -I/Applications/qt/5.5/clang_64/lib/QtCore.framework/Headers -I. -F/Applications/qt/5.5/clang_64/lib ../ViniLibCppQt/threadexample2.h -o moc_threadexample2.cpp
 
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
@@ -633,16 +642,26 @@ mainwindow.o: ../ViniLibCppQt/mainwindow.cpp /Applications/qt/5.5/clang_64/lib/Q
 		/Applications/qt/5.5/clang_64/lib/QtCore.framework/Headers/qthread.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../ViniLibCppQt/mainwindow.cpp
 
-threadexample1.o: ../ViniLibCppQt/threadexample1.cpp ../ViniLibCppQt/threadexample1.h \
+threadexample1.o: ../ViniLibCppQt/threadexample1.cpp /Applications/qt/5.5/clang_64/lib/QtCore.framework/Headers/QDebug \
+		/Applications/qt/5.5/clang_64/lib/QtCore.framework/Headers/qdebug.h \
+		../ViniLibCppQt/threadexample1.h \
 		/Applications/qt/5.5/clang_64/lib/QtCore.framework/Headers/QThread \
 		/Applications/qt/5.5/clang_64/lib/QtCore.framework/Headers/qthread.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o threadexample1.o ../ViniLibCppQt/threadexample1.cpp
+
+threadexample2.o: ../ViniLibCppQt/threadexample2.cpp /Applications/qt/5.5/clang_64/lib/QtCore.framework/Headers/QDebug \
+		/Applications/qt/5.5/clang_64/lib/QtCore.framework/Headers/qdebug.h \
+		../ViniLibCppQt/threadexample2.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o threadexample2.o ../ViniLibCppQt/threadexample2.cpp
 
 moc_mainwindow.o: moc_mainwindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_mainwindow.o moc_mainwindow.cpp
 
 moc_threadexample1.o: moc_threadexample1.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_threadexample1.o moc_threadexample1.cpp
+
+moc_threadexample2.o: moc_threadexample2.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_threadexample2.o moc_threadexample2.cpp
 
 ####### Install
 

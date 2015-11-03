@@ -52,11 +52,11 @@ public:
         lblTitle->setGeometry(QRect(150, 5, 91, 16));
         scrollArea = new QScrollArea(centralWidget);
         scrollArea->setObjectName(QStringLiteral("scrollArea"));
-        scrollArea->setGeometry(QRect(40, 40, 311, 191));
+        scrollArea->setGeometry(QRect(20, 40, 361, 191));
         scrollArea->setWidgetResizable(true);
         scrollAreaWidgetContents = new QWidget();
         scrollAreaWidgetContents->setObjectName(QStringLiteral("scrollAreaWidgetContents"));
-        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 309, 189));
+        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 359, 189));
         rbtThread_1 = new QRadioButton(scrollAreaWidgetContents);
         rbtThread_1->setObjectName(QStringLiteral("rbtThread_1"));
         rbtThread_1->setGeometry(QRect(20, 20, 281, 20));
@@ -66,7 +66,7 @@ public:
         scrollArea->setWidget(scrollAreaWidgetContents);
         textEdit = new QTextEdit(centralWidget);
         textEdit->setObjectName(QStringLiteral("textEdit"));
-        textEdit->setGeometry(QRect(40, 20, 311, 20));
+        textEdit->setGeometry(QRect(20, 20, 361, 20));
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));

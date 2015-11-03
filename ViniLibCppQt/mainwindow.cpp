@@ -3,6 +3,7 @@
 #include "ui_mainwindow.h"
 
 #include "threadexample1.h"
+#include "threadexample2.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -34,5 +35,11 @@ void MainWindow::showMsg1(bool checked)
 void MainWindow::showMsg2(bool checked)
 {
     if (checked)
-        ui->textEdit->setText("Thread Example - How to make two.");
+    {
+        ui->textEdit->setText("Thread Example - How to make two. Start");
+
+        ThreadExample2 obj;
+
+        ui->textEdit->setText("Thread Example - How to make two. The End");
+    }
 }
